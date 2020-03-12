@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "3cc7624b-8a9e-4652-9171-c42f76eaaf48",
+		"name": "Hero JWT Scenario USER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Heroes Sans Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/heroes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"heroes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"pseudo\": \"didax\",\n\t\"motDePasse\": \"bonjour\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23d6c978-4ff8-463f-9731-805cc7602a3e",
+						"exec": [
+							"",
+							"postman.setEnvironmentVariable('jwt', responseBody);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"pseudo\": \"didax\",\n\t\"motDePasse\": \"bonjour\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Heroes Avec Token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/heroes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"heroes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Route Admin",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/users/admin",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
